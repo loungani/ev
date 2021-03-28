@@ -1,5 +1,5 @@
 import random
-
+import numpy as np
 
 class Player:
     def __init__(self, alignment, role, charisma=0):
@@ -35,7 +35,15 @@ class Game:
     def assign_charismas(self):
         random.shuffle(populace)
         for idx in range(0, len(populace)):
-            populace[idx].set_charisma(idx)
+            player = populace[idx]
+            default_charisma = np.random.uniform(0, 1, 1)[0]
+
+            # option to apply a bonus to charisma if player is a villager
+            bonus = 0
+            if player.get_alignment() == "town":
+                player.set_charisma(default_charisma + bonus)
+            else:
+                player.set_charisma(default_charisma)
 
     def sort_by_charisma(self):
         populace.sort(key=lambda x: x.get_charisma(), reverse=True)
