@@ -38,7 +38,7 @@ class Game:
             populace[idx].set_charisma(idx)
 
     def sort_by_charisma(self):
-        populace.sort(key=lambda x: x.get_charisma())
+        populace.sort(key=lambda x: x.get_charisma(), reverse=True)
 
     def check_parity(self):
         num_town = len(list(filter(lambda x: x.get_alignment() == "town", populace)))
